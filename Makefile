@@ -3,7 +3,8 @@
 OUT_DIR=build
 CFLAGS=-L$(OUT_DIR)
 
-test: $(OUT_DIR)/test_dynamic_library
+test: $(OUT_DIR)/test_dynamic_library\
+	  $(OUT_DIR)/test_adjacent_string_literals_are_concatenated
 
 $(OUT_DIR):
 	mkdir $(OUT_DIR)
@@ -22,6 +23,10 @@ $(OUT_DIR)/%.so: $(OUT_DIR)/%.o
 $(OUT_DIR)/%.o:
 	@echo "INFO: compile test/$*.c into C object"
 	$(CC) ${CFLAGS} -o $@ -c test/$*.c
+
+$(OUT_DIR)/test_%: $(OUT_DIR)
+	$(CC) ${CFLAGS} -o $@ test/$*.c
+	$@ || (rm $@ && false)
 
 clean:
 	@rm $(OUT_DIR) -rf
