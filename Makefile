@@ -4,7 +4,12 @@ OUT_DIR=build
 CFLAGS=-L$(OUT_DIR)
 
 test: $(OUT_DIR)/test_dynamic_library\
-	  $(OUT_DIR)/test_adjacent_string_literals_are_concatenated
+	  $(OUT_DIR)/test_adjacent_string_literals_are_concatenated\
+	  $(OUT_DIR)/test_nested_scope\
+	  $(OUT_DIR)/test_function_scope\
+	  $(OUT_DIR)/test_function_prototype_scope\
+	  $(OUT_DIR)/test_point_of_declaration\
+
 
 $(OUT_DIR):
 	mkdir $(OUT_DIR)
