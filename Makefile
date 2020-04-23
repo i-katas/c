@@ -3,13 +3,20 @@
 OUT_DIR=build
 CFLAGS=-L$(OUT_DIR)
 
-test: $(OUT_DIR)/test_dynamic_library\
+test: reset\
+	  $(OUT_DIR)/test_dynamic_library\
 	  $(OUT_DIR)/test_adjacent_string_literals_are_concatenated\
 	  $(OUT_DIR)/test_nested_scope\
 	  $(OUT_DIR)/test_function_scope\
 	  $(OUT_DIR)/test_function_prototype_scope\
 	  $(OUT_DIR)/test_point_of_declaration\
+	  $(OUT_DIR)/test_object_has_constant_address\
+	  $(OUT_DIR)/test_same_identifier_in_diff_name_spaces\
+	  $(OUT_DIR)/test_no_struct_scope\
+	  $(OUT_DIR)/test_main_with_argc_only\
 
+reset:
+	-@tput reset
 
 $(OUT_DIR):
 	mkdir $(OUT_DIR)
