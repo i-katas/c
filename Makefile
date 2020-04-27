@@ -14,6 +14,7 @@ test: reset\
 	  $(OUT_DIR)/test_same_identifier_in_diff_name_spaces\
 	  $(OUT_DIR)/test_no_struct_scope\
 	  $(OUT_DIR)/test_main_with_argc_only\
+	  $(OUT_DIR)/test_basic_alignment\
 	  $(OUT_DIR)/test_object_alignment\
 
 reset:
