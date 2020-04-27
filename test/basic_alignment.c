@@ -23,4 +23,13 @@ int main(void) {
 
     assert(sizeof(long long) == 8);
     assert(alignof(long long) == 8);
+
+    long long number = 0x12345678;
+    char *ptr = (char*) &number;
+
+    //little-endian
+    assert(*(ptr + 0) == 0x78);
+    assert(*(ptr + 1) == 0x56);
+    assert(*(ptr + 2) == 0x34);
+    assert(*(ptr + 3) == 0x12);
 }
