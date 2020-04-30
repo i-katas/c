@@ -15,6 +15,7 @@ test: reset\
 	  $(OUT_DIR)/test_unevaluated_expressions\
 	  $(OUT_DIR)/test_lvalue_as_operand_of_the_address_of_operator $(OUT_DIR)/test_lvalue_as_operand_of_increment_or_decrement_operator $(OUT_DIR)/test_lvalue_as_left_operand_of_member_access_operator $(OUT_DIR)/test_lvalue_as_left_operand_of_assignments\
 	  $(OUT_DIR)/test_lvalue_of_compound_literals $(OUT_DIR)/test_lvalue_of_result_of_member_access_operator $(OUT_DIR)/test_lvalue_of_result_of_member_access_through_pointer_operator $(OUT_DIR)/test_lvalue_of_result_of_indirection_operator_applied_to_pointer $(OUT_DIR)/test_lvalue_of_result_of_indirection_operator_applied_to_pointer $(OUT_DIR)/test_lvalue_of_result_of_subscription_operator\
+	  $(OUT_DIR)/test_error_if_modify_const_variable $(OUT_DIR)/test_error_if_reassign_const_struct $(OUT_DIR)/test_error_if_modify_const_struct_members $(OUT_DIR)/test_error_if_reassign_struct_containing_const_members\
 
 reset:
 	-@tput reset
@@ -27,7 +28,7 @@ $(OUT_DIR)/test_dynamic_library: $(OUT_DIR) $(OUT_DIR)/max.so
 	$(CC) test/main.c ${CFLAGS} -lmax -o $@
 	LD_LIBRARY_PATH=$(OUT_DIR) $@ 
 	@echo "INFO: verify program linked with dynamic library"
-	ldd $@ | grep libmax.so 
+	LD_LIBRARY_PATH=$(OUT_DIR) ldd $@ | grep libmax.so 
 
 $(OUT_DIR)/%.so: $(OUT_DIR)/%.o
 	@echo "INFO: create dynamic shared library $(OUT_DIR)/lib$*.so"
@@ -36,6 +37,9 @@ $(OUT_DIR)/%.so: $(OUT_DIR)/%.o
 $(OUT_DIR)/%.o:
 	@echo "INFO: compile test/$*.c into C object"
 	$(CC) ${CFLAGS} -o $@ -c test/$*.c
+
+$(OUT_DIR)/test_error_if_%: $(OUT_DIR)
+	if $(CC) ${CFLAGS} -o $@ test/error/$*.c 2>/dev/null; then false; else true; fi
 
 $(OUT_DIR)/test_%: $(OUT_DIR)
 	$(CC) ${CFLAGS} -o $@ test/$*.c
