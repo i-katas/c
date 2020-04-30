@@ -13,6 +13,8 @@ test: reset\
 	  $(OUT_DIR)/test_main_with_argc_only\
 	  $(OUT_DIR)/test_basic_alignment $(OUT_DIR)/test_object_alignment $(OUT_DIR)/test_disable_padding\
 	  $(OUT_DIR)/test_unevaluated_expressions\
+	  $(OUT_DIR)/test_lvalue_as_operand_of_the_address_of_operator $(OUT_DIR)/test_lvalue_as_operand_of_increment_or_decrement_operator $(OUT_DIR)/test_lvalue_as_left_operand_of_member_access_operator $(OUT_DIR)/test_lvalue_as_left_operand_of_assignments\
+	  $(OUT_DIR)/test_lvalue_of_compound_literals $(OUT_DIR)/test_lvalue_of_result_of_member_access_operator $(OUT_DIR)/test_lvalue_of_result_of_member_access_through_pointer_operator $(OUT_DIR)/test_lvalue_of_result_of_indirection_operator_applied_to_pointer $(OUT_DIR)/test_lvalue_of_result_of_indirection_operator_applied_to_pointer $(OUT_DIR)/test_lvalue_of_result_of_subscription_operator\
 
 reset:
 	-@tput reset
